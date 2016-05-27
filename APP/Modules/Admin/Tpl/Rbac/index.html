@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Css/public.css" />
+	<title>用户列表</title>
+</head>
+<body>
+	<table class="table">
+		<tr>
+			<th>ID</th>
+			<th>用户名</th>
+			<th>登录时间</th>
+			<th>登录IP</th>
+			<th>是否锁定</th>
+			<th>操作</th>
+		</tr>
+		<foreach name="user" item="v">
+			<tr>
+				<td>{$v.id}</td>
+				<td>{$v.username}</td>
+				<td>{$v.logintime|date='Y-m-d H:i:s',###}</td>
+				<td>{$v.loginip}</td>
+				<td>
+					<if condition="$v['locked']">
+						已锁定
+						<else />
+						未锁定
+					</if>
+				</td>
+				<td><a href="{:U('Admin/Rbac/deleteUser',array('id' => $v['id']))}">删除</a></td>
+			</tr>
+		</foreach>
+	</table>
+</body>
+</html>
